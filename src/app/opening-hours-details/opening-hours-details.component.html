@@ -1,0 +1,30 @@
+<h1>Opening Hours Details:</h1>
+<div class="row" *ngIf="openingHoursDetails">
+    <div class="col-sm-6 mb-3 mb-sm-0 mt-1" *ngFor="let week of daysList">
+        <div class="card" *ngIf="openingHoursDetails[week] as weekInfo">
+            <div class="card-body">
+                <h5 class="card-title text-capitalize">{{week}}</h5>
+                <div class="card-text">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            Closed: {{weekInfo.close ? 'Yes' : 'No'}}
+                        </li>
+                        <li class="list-group-item">
+                            Open 24 Hrs: {{weekInfo.open24hrs ? 'Yes' : 'No'}}
+                        </li>
+                        <li class="list-group-item">
+                            Timings:
+                            <div *ngFor="let timing of weekInfo.timings; let l = last">
+                                Opens from {{timing.from || 'N/A'}} to {{timing.to ||'N/A'}}
+                                <hr *ngIf="!l" />
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="!openingHoursDetails">
+    <h1>No Details Found!</h1>
+</div>
